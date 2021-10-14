@@ -27,6 +27,8 @@ func NewRouter() *mux.Router {
 	return router
 }
 
+/*Como no hay punto y coma, si la llave final esta en otra linea hay que ponerle coma al ultimo elemento que pusiste dentro
+¿Que choto no?*/
 var routes = Routes{
 	Route{"index",
 		"GET",
@@ -40,4 +42,9 @@ var routes = Routes{
 		"GET",
 		"/pelicula/{id}",
 		MovieShow},
+	Route{"MovieAdd",
+		"POST",
+		"/pelicula",
+		MovieAdd,
+	},
 }
