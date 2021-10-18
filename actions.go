@@ -110,11 +110,6 @@ func MovieUpdate(w http.ResponseWriter, r *http.Request) {
 
 }
 
-type ResponseMessage struct {
-	Status  int    `json:"status"`
-	Message string `json:"message"`
-}
-
 func MovieDelete(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	movie_id := params["id"]
@@ -133,10 +128,13 @@ func MovieDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := ResponseMessage{200, "La película con ID= " + movie_id + " ha sido borrada exitosamente"}
+	message := new(ResponseMessage)
+	message.setStatus(200)
+	message.setMessage("La película con ID= " + movie_id + " ha sido borrada exitosamente")
+
 	w.Header().Set("ContentType", "application/json")
 	w.WriteHeader(200)
-	json.NewEncoder(w).Encode(result)
+	json.NewEncoder(w).Encode(message)
 
 }
 
